@@ -1,0 +1,30 @@
+[project]
+name = "dataforge"
+version = "0.1.0"
+description = "Synthetic Training Data Factory — LLM generator + verifier loop"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2",
+    "jinja2",
+    "httpx",
+    "datasets",
+    "datasketch",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+embedding = ["sentence-transformers"]
+
+[project.scripts]
+dataforge = "dataforge.cli:main"
+
+[tool.pytest.ini_options]
+markers = ["live: requires running Ollama (skipped by default)"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["dataforge"]

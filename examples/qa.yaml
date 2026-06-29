@@ -1,0 +1,19 @@
+task: customer-support-qa
+model:
+  generator: llama3.1:8b
+  verifier: llama3.1:8b
+  base_url: http://localhost:11434/v1
+target_samples: 5
+max_retries: 3
+score_threshold: 7        # verifier 1-10
+dedup:
+  mode: lexical           # lexical | embedding | off
+  threshold: 0.85
+seeds:
+  topic: [billing, returns, shipping, account]
+  persona: [frustrated, polite, confused]
+generator_template: templates/gen.j2
+verifier_template: templates/verify.j2
+output:
+  dir: ./out/customer-support-qa
+  push_to_hub: false
