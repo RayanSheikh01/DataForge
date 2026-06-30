@@ -34,4 +34,7 @@ class Config(BaseModel):
 
 def load_config(path: str) -> Config:
     """Read YAML file, return validated Config. Raises ValidationError on bad input."""
-    raise NotImplementedError
+    import yaml
+    with open(path, "r") as f:
+        data = yaml.safe_load(f)
+    return Config(**data)
