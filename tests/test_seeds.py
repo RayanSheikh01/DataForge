@@ -3,19 +3,48 @@
 import pytest
 
 
-@pytest.mark.skip(reason="TODO: implement SeedSampler")
 def test_yields_unique_combos():
     """next() returns each topic*persona combo once; remaining counts down."""
-    raise NotImplementedError
+    from dataforge.seeds import SeedSampler
+
+    seeds = {"topic": ["t1", "t2"], "persona": ["p1", "p2"]}
+    sampler = SeedSampler(seeds=seeds, seed=42)
+
+    combos = []
+    while sampler.remaining > 0:
+        combos.append(sampler.next())
+
+    assert len(combos) == 4
+    assert all(c in [{"topic": t, "persona": p} for t in ["t1", "t2"] for p in ["p1", "p2"]] for c in combos)
 
 
-@pytest.mark.skip(reason="TODO: implement SeedSampler")
 def test_exhaustion_raises():
     """After all combos consumed, next() raises."""
-    raise NotImplementedError
+    from dataforge.seeds import SeedSampler
+
+    seeds = {"topic": ["t1"], "persona": ["p1"]}
+    sampler = SeedSampler(seeds=seeds)
+
+    assert sampler.remaining == 1
+    sampler.next()
+    assert sampler.remaining == 0
+
+    with pytest.raises(StopIteration):
+        sampler.next()
 
 
-@pytest.mark.skip(reason="TODO: implement SeedSampler")
 def test_exclude_skips_used_combos():
     """Combos in exclude= are not returned (resume support)."""
-    raise NotImplementedError
+    from dataforge.seeds import SeedSampler
+
+    seeds = {"topic": ["t1", "t2"], "persona": ["p1", "p2"]}
+    exclude = {("t1", "p1"), ("t2", "p2")}
+    sampler = SeedSampler(seeds=seeds, exclude=exclude, seed=42)
+
+    combos = []
+    while sampler.remaining > 0:
+        combos.append(sampler.next())
+
+    assert len(combos) == 2
+    assert all(c in [{"topic": t, "persona": p} for t in ["t1", "t2"] for p in ["p1", "p2"]] for c in combos)
+    assert all((c["topic"], c["persona"]) not in exclude for c in combos)
