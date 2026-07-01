@@ -109,3 +109,8 @@ python -m pytest -m live      # live smoke tests against a real Ollama
 
 Tests use an in-memory `FakeLLM` so the default suite never touches the network.
 New work is written test-first.
+
+## Docs
+
+- [design.md](design.md) — architecture, decisions, data models, testing strategy.
+- [implementation.md](implementation.md) — module-by-module build guide.
