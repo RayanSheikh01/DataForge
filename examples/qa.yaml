@@ -1,7 +1,7 @@
 task: customer-support-qa
 model:
-  generator: llama3.1:8b
-  verifier: llama3.1:8b
+  generator: llama3.2:latest
+  verifier: llama3.2:latest
   base_url: http://localhost:11434/v1
 target_samples: 5
 max_retries: 3

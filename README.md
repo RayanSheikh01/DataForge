@@ -46,7 +46,7 @@ To use the pipeline end-to-end you also need a running Ollama with the models
 named in your config, e.g.:
 
 ```
-ollama pull llama3.1:8b
+ollama pull llama3.2:latest
 ```
 
 ## Usage
@@ -56,8 +56,8 @@ Configure a task in YAML (see [`examples/qa.yaml`](examples/qa.yaml)):
 ```yaml
 task: customer-support-qa
 model:
-  generator: llama3.1:8b
-  verifier: llama3.1:8b
+  generator: llama3.2:latest
+  verifier: llama3.2:latest
   base_url: http://localhost:11434/v1
 target_samples: 5
 max_retries: 3
