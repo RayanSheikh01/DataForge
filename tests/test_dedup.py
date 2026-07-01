@@ -28,3 +28,4 @@ def test_mode_off_never_flags():
     text2 = "The quick brown fox jumps over the lazy dog."
     assert not dedup.is_duplicate(text1)
     assert not dedup.is_duplicate(text2)
+
