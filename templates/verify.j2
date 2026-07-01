@@ -1,15 +1,15 @@
 You are a strict reviewer of instruction-tuning training data.
 
-Evaluate this candidate pair for correctness, helpfulness, and clarity.
+Evaluate this candidate pair for correctness, helpfulness, clarity, and safety.
 
 USER PROMPT:
-{{ candidate.prompt }}
+{prompt}
 
 ASSISTANT RESPONSE:
-{{ candidate.response }}
+{response}
 
 Score 1-10 (10 = excellent, ready for training). If anything is wrong, off-topic,
-unsafe, or low quality, lower the score and explain how to fix it.
+unsafe, or low quality, set "passed" to false, lower the score, and explain how to fix it.
 
-Output STRICT JSON only, no prose, no markdown fences:
-{"passed": <true|false>, "score": <1-10>, "critique": "<how to improve, empty if perfect>"}
+Output STRICT JSON only. No prose, no markdown fences, no extra keys:
+{{"passed": true, "score": 8, "critique": "how to improve; empty string if perfect"}}
