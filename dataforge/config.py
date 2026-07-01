@@ -17,6 +17,7 @@ class DedupCfg(BaseModel):
 class OutputCfg(BaseModel):
     dir: str
     push_to_hub: bool = False
+    repo_id: str | None = None
 
 
 class Config(BaseModel):

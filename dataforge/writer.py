@@ -1,6 +1,7 @@
 """Output writer: append-only JSONL (resumable) + HF dataset export."""
 
 import json
+import os
 
 from datasets import Dataset
 
@@ -8,8 +9,9 @@ from datasets import Dataset
 class Writer:
     def __init__(self, out_dir: str):
         """Ensure out_dir exists; set data.jsonl path."""
-        self.out_dir = out_dir
-        self.jsonl_path = f"{out_dir}/data.jsonl"
+        self.out_dir = str(out_dir)
+        os.makedirs(self.out_dir, exist_ok=True)
+        self.jsonl_path = os.path.join(self.out_dir, "data.jsonl")
         
         
     def append(self, record: dict) -> None:

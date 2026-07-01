@@ -36,6 +36,9 @@ htmlcov/
 .idea/
 *.swp
 
+# DataForge generated output
+out/
+
 # OS
 .DS_Store
 Thumbs.db
